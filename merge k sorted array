@@ -1,0 +1,31 @@
+typedef pair<int, pair<int , int>> ppi;
+class Solution
+{
+    public:
+    //Function to merge k sorted arrays.
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    {
+         priority_queue<ppi , vector<ppi> , greater<ppi>> q;
+        vector<int> ans;
+        for(int i=0;i<k;i++)
+        {
+            q.push({arr[i][0],{i,0}});
+            
+        }
+        while(q.size()>0)
+        {
+            pair<int,pair<int,int>> p=q.top();
+            q.pop();
+            ans.push_back(p.first);
+            if(p.second.second<k-1)
+            {
+                q.push({arr[p.second.first][p.second.second+1],{p.second.first,p.second.second+1}});
+                
+            }
+            
+        }
+        
+        return ans;
+        //code here
+    }
+};
